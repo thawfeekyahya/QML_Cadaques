@@ -7,9 +7,17 @@ Item {
 
     signal clicked;
 
+    property alias label:buttonText.text
+
 
     Rectangle {
         id:buttonArea;
+
+        Text {
+            id:buttonText;
+            text:root.label
+        }
+
         width:100;
         height:35;
         color:"#00df00";
@@ -19,7 +27,6 @@ Item {
         anchors.fill: buttonArea;
         onClicked: {
             root.clicked();
-            exposedVar += 1;
         }
     }
 

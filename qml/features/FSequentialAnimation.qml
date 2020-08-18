@@ -6,7 +6,7 @@ Rectangle {
     height:500;
     id:root;
     property int durations: 3000;
-
+    property int anim: 0
 
     Image {
         source : "assets/rocket.png"
@@ -18,6 +18,7 @@ Rectangle {
         anchors.fill:  parent;
         onClicked: {
             sequential.restart();
+            _anim.restart();
             console.log("fire");
         }
     }
@@ -26,6 +27,8 @@ Rectangle {
 
     SequentialAnimation {
           id:sequential;
+
+
         NumberAnimation {
             target:rocket;
             property: "x";
@@ -35,6 +38,7 @@ Rectangle {
             duration: root.durations*0.6;
         }
         NumberAnimation {
+            id:_yAnim;
             target:rocket;
             property: "y";
             to:0;
@@ -50,6 +54,19 @@ Rectangle {
         }
 
     }
+
+   SequentialAnimation on anim {
+        loops: Animation.Infinite
+        NumberAnimation {from:1; to: 50 }
+        PauseAnimation {
+            duration: 200
+        }
+    }
+
+   onAnimChanged: {
+       //console.log("anim ----->",anim)
+   }
+
 
 
 }
